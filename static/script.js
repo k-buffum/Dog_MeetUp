@@ -77,10 +77,15 @@ function addMarker(place) {
 	})
 	google.maps.event.addListener(marker, 'click', function() {
 		console.log(place);
-		$(".parkName").html(place.name);
-		$(".parkLocation").html(place.vicinity);
-		$(".parkRating").html(place.rating);
-		
+		var request = { placeId: place.place_id };
+		service.getDetails(request, function(placeData, status) {
+			console.log("********************");
+			console.log("PLACE DATA!!!!!!!!!!!!!");
+			console.log(placeData);
+			$(".parkName").html(place.name);
+			$(".parkLocation").html(place.vicinity);
+			$(".parkRating").html(place.rating);
+		});
 	});
 }
 
