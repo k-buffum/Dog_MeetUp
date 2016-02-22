@@ -1,4 +1,4 @@
-//  https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCH-nHN7w5zeHRSlPzCRN8MYuL6XfaJlkY&location=47.6165126,-122.3555086&radius=1000&keyword=park
+
 var apiKey = "AIzaSyCH-nHN7w5zeHRSlPzCRN8MYuL6XfaJlkY";
 
 // var exports = module.exports = {}
@@ -47,59 +47,49 @@ function getParks(position) {
 		lat: position.coords.latitude,
 		lng: position.coords.longitude
 	};
-
-	$.ajax({
-		url: "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=" + apiKey + "&location=" + pos.lat + "," + pos.lng + "&radius=1000&keyword=park",
-		crossDomain: true,
-		method: "GET"
-	}).done(function(data) {
-		console.log(data);
-	})
-
-	// $.get("https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyCH-nHN7w5zeHRSlPzCRN8MYuL6XfaJlkY&placeid=")
 	
-	// var request = {
-	//     location: pos,
-	//     radius: '2000',
-	//     types: ['park']
- //  	};
+	var request = {
+	    location: pos,
+	    radius: '2000',
+	    types: ['park']
+  	};
 
- //    service = new google.maps.places.PlacesService(map);
- //    service.nearbySearch(request, function(results, status) {
-	// 	if (status == google.maps.places.PlacesServiceStatus.OK) {
- //    		addMarkers(results);
- //    	}
- //    });
+    service = new google.maps.places.PlacesService(map);
+    service.nearbySearch(request, function(results, status) {
+		if (status == google.maps.places.PlacesServiceStatus.OK) {
+    		addMarkers(results);
+    	}
+    });
 }
 
-// function addMarkers(places) {
-//     for (var i = 0; i < places.length; i++) {
-//         var place = places[i];
-//         addMarker(place);
-//         // console.log(place);
-//     }
-// }
+function addMarkers(places) {
+    for (var i = 0; i < places.length; i++) {
+        var place = places[i];
+        addMarker(place);
+        // console.log(place);
+    }
+}
 
-// function addMarker(place) {
-// 	var marker = new google.maps.Marker({
-// 		map: map,
-// 		position: place.geometry.location
-// 	})
-// 	google.maps.event.addListener(marker, 'click', function() {
-// 		console.log(place);
-// 		$(".parkName").html(place.name);
-// 		$(".parkLocation").html(place.vicinity);
-// 		$(".parkRating").html(place.rating);
+function addMarker(place) {
+	var marker = new google.maps.Marker({
+		map: map,
+		position: place.geometry.location
+	})
+	google.maps.event.addListener(marker, 'click', function() {
+		console.log(place);
+		$(".parkName").html(place.name);
+		$(".parkLocation").html(place.vicinity);
+		$(".parkRating").html(place.rating);
 		
-// 	});
-// }
+	});
+}
 
-// function showPlaceDetails(place) {
-//     infoWindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-//       	'Place ID: ' + place.place_id + '<br>' +
-//       	place.formatted_address + '</div>');
-//     infoWindow.open(map, this);
-// }
+function showPlaceDetails(place) {
+    infoWindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+      	'Place ID: ' + place.place_id + '<br>' +
+      	place.formatted_address + '</div>');
+    infoWindow.open(map, this);
+}
 
 function locationError(browserHasGeolocation, infoWindow, pos) {
 	infoWindow.setPosition(pos);
