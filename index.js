@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var ejsLayouts = require("express-ejs-layouts");
 var request = require("request");
 var db = require("./models");
+// var maps = require("./static/script.js");
 var app = express();
 
 app.set("view engine", "ejs");
@@ -23,6 +24,9 @@ app.use(bodyParser.urlencoded({extended: false}));
   and location
 */
 app.get("/", function(req, res) {
+	// var require = function(path) {
+	// 	return module.exports;
+	// }
 	res.render("index.ejs");
 });
 

@@ -13,6 +13,7 @@
     "ejs": "^2.4.1",
     "express": "^4.13.4",
     "express-ejs-layouts": "^2.0.0",
+    "geocoder": "^0.2.2",
     "google-places": "0.0.2",
     "pg": "^4.4.6",
     "pg-hstore": "^2.3.2",
