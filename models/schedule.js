@@ -1,9 +1,9 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var Scheduling = sequelize.define('Scheduling', {
+  var Schedule = sequelize.define('Schedule', {
     userId: DataTypes.INTEGER,
-    locationId: DataTypes.INTEGER,
     time: DataTypes.TIME,
+    location: DataTypes.STRING,
     smallDogs: DataTypes.INTEGER,
     mediumDogs: DataTypes.INTEGER,
     largeDogs: DataTypes.INTEGER
@@ -14,5 +14,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return Scheduling;
+  return Schedule;
 };

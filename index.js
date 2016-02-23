@@ -27,14 +27,20 @@ app.get("/", function(req, res) {
 	res.render("index.ejs");
 });
 
-
-
-
-
 app.post("/schedule", function(req, res) {
-	console.log(req.body.parkName);
-	console.log(req.body.time);
+	db.Schedule.create({
+		location: req.body.parkName,
+		time: req.body.time
+	}).then(function(data) {
+
+	});
 });
+
+app.get("/schedule", function(req, res) {
+	db.Schedule.findAll().then(function(schedules) {
+		console.log(schedules);
+	});
+})
 
 app.listen(3000);
 

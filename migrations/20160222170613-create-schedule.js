@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Schedulings', {
+    return queryInterface.createTable('Schedules', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,11 +11,11 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER
       },
-      locationId: {
-        type: Sequelize.INTEGER
-      },
       time: {
         type: Sequelize.TIME
+      },
+      location: {
+        type: Sequelize.STRING
       },
       smallDogs: {
         type: Sequelize.INTEGER
@@ -37,6 +37,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Schedulings');
+    return queryInterface.dropTable('Schedules');
   }
 };
