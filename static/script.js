@@ -76,25 +76,37 @@ function addMarker(place) {
 		position: place.geometry.location
 	})
 	google.maps.event.addListener(marker, 'click', function() {
+		$(".parkHours").html("");
 		console.log(place);
 		var request = { placeId: place.place_id };
 		service.getDetails(request, function(placeData, status) {
 			console.log("********************");
 			console.log("PLACE DATA!!!!!!!!!!!!!");
 			console.log(placeData);
-			$(".parkName").html(place.name);
-			$(".parkLocation").html(place.vicinity);
-			$(".parkRating").html(place.rating);
+			console.log(placeData.website);
+			$(".parkName").html(placeData.name);
+			$(".parkLocation").html("Address: " + placeData.formatted_address);
+			$(".parkPhone").html("Phone: " + placeData.formatted_phone_number);
+			$(".parkWebsite").html("Website: " + placeData.website);
+			if (placeData.rating) {
+				$(".parkRating").html("Rating: " + placeData.rating);
+			}
+			if (placeData.opening_hours && placeData.opening_hours.weekday_text) {
+				$(".parkHours").html("Hours: ")
+				for(var i = 0; i < placeData.opening_hours.weekday_text.length; i++) {
+					$(".parkHours").append("<p>").append(placeData.opening_hours.weekday_text[i]);
+				};
+			}
 		});
 	});
 }
 
-function showPlaceDetails(place) {
-    infoWindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-      	'Place ID: ' + place.place_id + '<br>' +
-      	place.formatted_address + '</div>');
-    infoWindow.open(map, this);
-}
+// function showPlaceDetails(place) {
+//     infoWindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+//       	'Place ID: ' + place.place_id + '<br>' +
+//       	place.formatted_address + '</div>');
+//     infoWindow.open(map, this);
+// }
 
 function locationError(browserHasGeolocation, infoWindow, pos) {
 	infoWindow.setPosition(pos);
