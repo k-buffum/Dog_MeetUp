@@ -24,9 +24,6 @@ app.use(bodyParser.urlencoded({extended: false}));
   and location
 */
 app.get("/", function(req, res) {
-	// var require = function(path) {
-	// 	return module.exports;
-	// }
 	res.render("index.ejs");
 });
 
@@ -35,11 +32,8 @@ app.get("/", function(req, res) {
 
 
 app.post("/schedule", function(req, res) {
-	console.log(req.body.name);
-	console.log(req.body.dogAmount);
+	console.log(req.body.parkName);
 	console.log(req.body.time);
-	console.log(req.body.date);
-	console.log(req.body.location);
 });
 
 app.listen(3000);

@@ -33,10 +33,7 @@ function setLocation(position) {
 		lat: position.coords.latitude,
 		lng: position.coords.longitude
 	};
-	// console.log(pos);
-
 	infoWindow = new google.maps.InfoWindow({map: map});
-
 	infoWindow.setPosition(pos);
 	infoWindow.setContent("Location spotted.");
 	map.setCenter(pos);
@@ -66,7 +63,6 @@ function addMarkers(places) {
     for (var i = 0; i < places.length; i++) {
         var place = places[i];
         addMarker(place);
-        // console.log(place);
     }
 }
 
@@ -77,14 +73,10 @@ function addMarker(place) {
 	})
 	google.maps.event.addListener(marker, 'click', function() {
 		$(".parkHours").html("");
-		console.log(place);
 		var request = { placeId: place.place_id };
 		service.getDetails(request, function(placeData, status) {
-			console.log("********************");
-			console.log("PLACE DATA!!!!!!!!!!!!!");
-			console.log(placeData);
-			console.log(placeData.website);
 			$(".parkName").html(placeData.name);
+			$('#park-name').val(placeData.name);
 			$(".parkLocation").html("Address: " + placeData.formatted_address);
 			$(".parkPhone").html("Phone: " + placeData.formatted_phone_number);
 			$(".parkWebsite").html("Website: " + placeData.website);
