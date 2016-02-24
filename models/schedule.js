@@ -4,9 +4,6 @@ module.exports = function(sequelize, DataTypes) {
     userId: DataTypes.INTEGER,
     time: DataTypes.TIME,
     location: DataTypes.STRING,
-    smallDogs: DataTypes.INTEGER,
-    mediumDogs: DataTypes.INTEGER,
-    largeDogs: DataTypes.INTEGER,
     placeId: DataTypes.STRING
   }, {
     classMethods: {

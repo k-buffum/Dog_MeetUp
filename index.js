@@ -92,6 +92,33 @@ app.get("/settings", function(req, res) {
 	}
 });
 
+app.post("/settings", function(req, res) {
+	var smallDogs = req.body.smallDogs;
+	var mediumDogs = req.body.mediumDogs;
+	var largeDogs = req.body.largeDogs;
+	var userId = res.locals.currentUser.id;
+	
+	db.User.findById(userId).then(function(user){
+		// console.log(user);
+		// user.smallDogs = smallDogs;
+		// user.mediumDogs = mediumDogs;
+		// user.largeDogs = largeDogs;
+		// user.save().then(function() {
+		// 	req.flash("sucess", "Settings have been updated.");
+		// 	res.redirect("/");
+		// });
+
+		user.updateAttributes({
+			smallDogs: smallDogs,
+			mediumDogs: mediumDogs,
+			largeDogs: largeDogs
+		}).then(function() {
+			req.flash("success", "Settings have been updated.");
+			res.redirect("/");
+		});
+	});
+});
+
 app.use("/auth", require("./controllers/auth"));
 app.listen(3000);
 

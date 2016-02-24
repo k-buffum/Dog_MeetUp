@@ -17,15 +17,6 @@ module.exports = {
       location: {
         type: Sequelize.STRING
       },
-      smallDogs: {
-        type: Sequelize.INTEGER
-      },
-      mediumDogs: {
-        type: Sequelize.INTEGER
-      },
-      largeDogs: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

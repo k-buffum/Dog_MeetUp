@@ -10,7 +10,10 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len: [6, 99]
       }
-    }
+    },
+    smallDogs: DataTypes.INTEGER,
+    mediumDogs: DataTypes.INTEGER,
+    largeDogs: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
