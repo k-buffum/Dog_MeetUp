@@ -4,7 +4,10 @@ module.exports = function(sequelize, DataTypes) {
     userId: DataTypes.INTEGER,
     time: DataTypes.TIME,
     location: DataTypes.STRING,
-    placeId: DataTypes.STRING
+    placeId: DataTypes.STRING,
+    smallDogs: DataTypes.INTEGER,
+    mediumDogs: DataTypes.INTEGER,
+    largeDogs: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {

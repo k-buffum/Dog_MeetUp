@@ -47,7 +47,7 @@ function getParks(position) {
 	
 	var request = {
 	    location: pos,
-	    radius: '2000',
+	    radius: '5000',
 	    types: ['park']
   	};
 
@@ -113,6 +113,55 @@ function locationError(browserHasGeolocation, infoWindow, pos) {
 				'Error: Your browser doesn\'t support geolocation.');
 }
 
+
+$(document).ready(function() {
+	$.ajax("/api/schedule")
+	.done(function(data) {
+		console.log(data);
+		var ctx = document.getElementById("myChart").getContext("2d");
+		var time = data.map(function(schedule) {
+			return schedule.time;
+		});
+		var smallDogs = {
+			label: "Small Dogs",
+			fillColor: "rgba(255, 121, 44, 0.4)",
+			strokeColor: "rgba(255, 121, 44, 0.8)",
+			highlightFill: "rgba(255, 121, 44, 0.75)" ,
+			highlightStroke: "rgba(255, 121, 44, 1)",
+			data: data.map(function(schedule) {
+				return schedule.smallDogs;
+			})
+		}
+		var mediumDogs = {
+			label: "Medium Dogs",
+			fillColor: "rgba(73, 121, 44, 0.4)",
+			strokeColor: "rgba(73, 121, 44, 0.8)",
+			highlightFill: "rgba(73, 121, 44, 0.75)",
+			highlightStroke: "rgba(73, 121, 44, 1)",
+			data: data.map(function(schedule) {
+				return schedule.mediumDogs;
+			})
+		}
+		var largeDogs = {
+			label: "Large Dogs",
+			fillColor: "rgba(35, 79, 126, 0.4)",
+			strokeColor: "rgba(35, 79, 126, 0.8)",
+			highlightFill: "rgba(35, 79, 126, 0.75)",
+			highlightStroke: "rgba(35, 79, 126, 1)",
+			data: data.map(function(schedule) {
+				return schedule.largeDogs;
+			})
+		}
+		var chartData = {
+			labels: time,
+			datasets: [smallDogs, mediumDogs, largeDogs]
+		};
+		var myBarChart = new Chart(ctx).Bar(chartData, {
+			legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li style=\"background-color:<%=datasets[i].fillColor%>\"><span></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+		});
+		document.getElementById("legend").innerHTML = myBarChart.generateLegend();
+	});	
+})
 
 
 

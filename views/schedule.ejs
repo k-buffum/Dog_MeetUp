@@ -1,11 +1,4 @@
-<% schedules.forEach(function(schedule) { %>
-	<span>
-		<h3 class="parkName"><%= schedule.location %></h3>
-		<h4 class="scheduledTime"><%= schedule.time %></h3>
-		<p><%= schedule.placeId %></p>
-		<p><%= schedule.userId %></p>
-		<p><%= schedule.smallDogs %></p>
-		<p><%= schedule.mediumDogs %></p>
-		<p><%= schedule.largeDogs %></p>
-	</span>
-<% }); %>
+<h1><%= schedules[0].location %></h1>
+
+<canvas id="myChart" width="400" height="400"></canvas>
+<div id="legend"></div>

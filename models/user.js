@@ -13,7 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     smallDogs: DataTypes.INTEGER,
     mediumDogs: DataTypes.INTEGER,
-    largeDogs: DataTypes.INTEGER
+    largeDogs: DataTypes.INTEGER,
+    scheduleId: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
