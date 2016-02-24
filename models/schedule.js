@@ -6,7 +6,8 @@ module.exports = function(sequelize, DataTypes) {
     location: DataTypes.STRING,
     smallDogs: DataTypes.INTEGER,
     mediumDogs: DataTypes.INTEGER,
-    largeDogs: DataTypes.INTEGER
+    largeDogs: DataTypes.INTEGER,
+    placeId: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {

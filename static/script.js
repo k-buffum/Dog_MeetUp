@@ -75,14 +75,20 @@ function addMarker(place) {
 		$(".parkHours").html("");
 		var request = { placeId: place.place_id };
 		service.getDetails(request, function(placeData, status) {
-			$(".parkName").html(placeData.name);
+			// console.log(placeData.place_id);
 			$('#park-name').val(placeData.name);
+			$('#park-id').val(placeData.place_id);
+			console.log($("#park-id").val());
+
+			$(".parkName").html(placeData.name);
 			$(".parkLocation").html("Address: " + placeData.formatted_address);
 			$(".parkPhone").html("Phone: " + placeData.formatted_phone_number);
 			$(".parkWebsite").html("Website: " + placeData.website);
+
 			if (placeData.rating) {
 				$(".parkRating").html("Rating: " + placeData.rating);
 			}
+
 			if (placeData.opening_hours && placeData.opening_hours.weekday_text) {
 				$(".parkHours").html("Hours: ")
 				for(var i = 0; i < placeData.opening_hours.weekday_text.length; i++) {

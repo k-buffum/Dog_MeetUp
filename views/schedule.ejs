@@ -1,0 +1,11 @@
+<% schedules.forEach(function(schedule) { %>
+	<span>
+		<h3 class="parkName"><%= schedule.location %></h3>
+		<h4 class="scheduledTime"><%= schedule.time %></h3>
+		<p><%= schedule.placeId %></p>
+		<p><%= schedule.userId %></p>
+		<p><%= schedule.smallDogs %></p>
+		<p><%= schedule.mediumDogs %></p>
+		<p><%= schedule.largeDogs %></p>
+	</span>
+<% }); %>
