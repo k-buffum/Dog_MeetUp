@@ -34,11 +34,14 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/auth/login">Login</a></li>
-					<li><a href="/auth/register">Register</a></li>
-					<li><a href="/auth/logout">Logout</a></li>
-					<li><a href="/schedule">Schedule</a></li>
-					<li><a href="/settings">Settings</a></li>
+					<% if (!currentUser) { %>
+					<li><a href="/auth/login" id="loginBtn">Login</a></li>
+					<li><a href="/auth/register" id="registerBtn">Register</a></li>
+					<% } else { %>
+					<li><a href="/auth/logout" id="logoutBtn">Logout</a></li>
+					<li><a href="/schedule" id="scheduleBtn">Schedule</a></li>
+					<li><a href="/settings" id="settingsBtn">Settings</a></li>
+					<% } %>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div>

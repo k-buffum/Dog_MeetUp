@@ -181,6 +181,22 @@ $(document).ready(function() {
 	});	
 });
 
-
+// Hides login/register button when logged in
+// Hids logout/schedule/settings buttons when logged out
+// $(document).ready(function() {
+// 	if (userId) {
+// 		$(".loginBtn").hide();
+// 		$(".registerBtn").hide();
+// 		$(".logoutBtn").show();
+// 		$(".scheduleBtn").show();
+// 		$(".settingsBtn").show();
+// 	} else {
+// 		$(".loginBtn").show();
+// 		$(".registerBtn").show();
+// 		$(".logoutBtn").hide();
+// 		$(".scheduleBtn").hide();
+// 		$(".settingsBtn").hide();
+// 	}
+// });
 
 

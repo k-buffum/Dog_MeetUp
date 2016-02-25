@@ -6,7 +6,6 @@ var session= require("express-session");
 var flash = require("connect-flash");
 var db = require("./models");
 var app = express();
-var request = require('request');
 var port = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
