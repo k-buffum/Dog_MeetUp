@@ -75,7 +75,7 @@ function addMarker(place) {
 			// console.log(placeData.place_id);
 			$('#park-name').val(placeData.name);
 			$('#park-id').val(placeData.place_id);
-			console.log($("#park-id").val());
+			// console.log($("#park-id").val());
 
 			$(".parkName").html(placeData.name);
 			$(".parkLocation").html("Address: " + placeData.formatted_address);
@@ -116,7 +116,7 @@ $(document).ready(function() {
 		
 		for (var i = 0; i < data.length; i++) {
 			if (data[i].time < "07:00:00") {
-				// Avoids have to do 2 checks in each if(data[i].time > "07:00:00")
+				// Avoids having to do 2 checks in each if(data[i].time > "07:00:00")
 			} else if (data[i].time < "08:00:00") {
 				numDogs[0] += data[i].smallDogs + data[i].mediumDogs + data[i].largeDogs;
 			} else if (data[i].time < "09:00:00") {
@@ -175,28 +175,10 @@ $(document).ready(function() {
 			method: "DELETE",
 			url: myUrl
 		}).done(function(success) {
-			console.log(success);
+			// console.log(success);
 			window.location.href="/schedule";
 		});
 	});	
 });
-
-// Hides login/register button when logged in
-// Hids logout/schedule/settings buttons when logged out
-// $(document).ready(function() {
-// 	if (userId) {
-// 		$(".loginBtn").hide();
-// 		$(".registerBtn").hide();
-// 		$(".logoutBtn").show();
-// 		$(".scheduleBtn").show();
-// 		$(".settingsBtn").show();
-// 	} else {
-// 		$(".loginBtn").show();
-// 		$(".registerBtn").show();
-// 		$(".logoutBtn").hide();
-// 		$(".scheduleBtn").hide();
-// 		$(".settingsBtn").hide();
-// 	}
-// });
 
 

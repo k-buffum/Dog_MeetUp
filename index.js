@@ -111,7 +111,7 @@ app.get("/schedule", function(req, res) {
 					// Adds google places details under graph
 					request('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + schedule.placeId + '&key=' + process.env.GOOGLE_KEY, function (error, response, body) {
 			  			if (!error && response.statusCode == 200) {
-			  				console.log(JSON.parse(body).result);
+			  				// console.log(JSON.parse(body).result);
 							res.render("schedule.ejs", {
 								data: JSON.parse(body).result,
 								reviews: reviews,
@@ -127,7 +127,7 @@ app.get("/schedule", function(req, res) {
 
 // Sends schedule info to frontend ajax request
 app.get("/api/schedule", function(req, res) {
-	if (req.user) {
+	if (req.session.userId) {
 		// Finds user by userID in
 		db.User.findById(res.locals.currentUser.id)
 		.then(function(user) {
@@ -143,8 +143,6 @@ app.get("/api/schedule", function(req, res) {
 				});			
 			});
 		});
-	} else {
-
 	}
 });
 
