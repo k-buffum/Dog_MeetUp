@@ -127,22 +127,26 @@ app.get("/schedule", function(req, res) {
 
 // Sends schedule info to frontend ajax request
 app.get("/api/schedule", function(req, res) {
-	// Finds user by userID in
-	db.User.findById(res.locals.currentUser.id)
-	.then(function(user) {
-		db.Schedule.findById(user.scheduleId)
-		.then(function(schedule) {
-			db.Schedule.findAll({
-				where: {
-					placeId: schedule.placeId
-				}
-			}).then(function(schedules) {
-				// console.log(schedules);
-				res.send(schedules);
-			});			
+	if (req.user) {
+		// Finds user by userID in
+		db.User.findById(res.locals.currentUser.id)
+		.then(function(user) {
+			db.Schedule.findById(user.scheduleId)
+			.then(function(schedule) {
+				db.Schedule.findAll({
+					where: {
+						placeId: schedule.placeId
+					}
+				}).then(function(schedules) {
+					// console.log(schedules);
+					res.send(schedules);
+				});			
+			});
 		});
-	});
-})
+	} else {
+
+	}
+});
 
 // Directs user to settings page if they are logged in
 app.get("/settings", function(req, res) {
