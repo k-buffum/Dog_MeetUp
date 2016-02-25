@@ -68,6 +68,7 @@ app.post("/schedule", function(req, res) {
 					}
 				})
 				.then(function(user) {
+					// If user has already scheduled a time, it updates time and location with new values
 					user.updateAttributes({
 						placeId: req.body.parkId,
 						location: req.body.parkName,
@@ -106,7 +107,6 @@ app.get("/schedule", function(req, res) {
 						placeId: schedules[0].placeId
 					}
 				}).then(function(reviews) {
-					console.log(reviews);
 					// Adds google places details under graph
 					request('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + schedules[0].placeId + '&key=' + process.env.GOOGLE_KEY, function (error, response, body) {
 		  			if (!error && response.statusCode == 200) {
@@ -137,12 +137,12 @@ app.get("/api/schedule", function(req, res) {
 			}).then(function(schedules) {
 				// console.log(schedules);
 				res.send(schedules);
-
 			});			
 		});
 	});
 })
 
+// Directs user to settings page if they are logged in
 app.get("/settings", function(req, res) {
 	if (res.locals.currentUser) {
 		res.render("settings.ejs", { alerts: req.flash()});
@@ -152,6 +152,7 @@ app.get("/settings", function(req, res) {
 	}
 });
 
+// Posts dog sizes to db
 app.post("/settings", function(req, res) {
 	var smallDogs = req.body.smallDogs;
 	var mediumDogs = req.body.mediumDogs;
@@ -175,14 +176,13 @@ app.post("/settings", function(req, res) {
 	});
 });
 
+// Posts reviews to Review db
 app.post("/schedule/review", function(req, res) {
 	var placeId = req.body.placeId
 	var userId = req.body.userId
 	var rating = req.body.rating
 	var review = req.body.review
 	var username = req.body.username
-
-	console.log(req.body.userId);
 
 	db.Reviews.create({
 		placeId: placeId,
