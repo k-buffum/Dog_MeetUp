@@ -166,6 +166,20 @@ $(document).ready(function() {
 });
 
 
+// Delete button on displayed reviews
+$(document).ready(function() {
+	$(".delete-link").on("click", function(e) {
+		e.preventDefault();
+		var myUrl = $(this).attr("href");
+		$.ajax({
+			method: "DELETE",
+			url: myUrl
+		}).done(function(success) {
+			console.log(success);
+			window.location.href="/schedule";
+		});
+	});	
+});
 
 
 

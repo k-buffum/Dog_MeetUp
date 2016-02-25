@@ -55,6 +55,9 @@
 	        </form>
 		</div>
 		<p>Review: <%= review.reviews %></p>
+		<% if(currentUser.id == review.userId) { %>
+			<a href="/schedule/review/<%= review.id %>" class="delete-link">Delete</a>
+		<% } %>
 		___________________________________________________________________
 	</div>
 	<% }) %>

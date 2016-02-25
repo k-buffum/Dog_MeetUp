@@ -105,7 +105,8 @@ app.get("/schedule", function(req, res) {
 				db.Reviews.findAll({
 					where: {
 						placeId: schedule.placeId
-					}
+					},
+					order: '"createdAt" desc'
 				}).then(function(reviews) {
 					// Adds google places details under graph
 					request('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + schedule.placeId + '&key=' + process.env.GOOGLE_KEY, function (error, response, body) {
@@ -113,7 +114,8 @@ app.get("/schedule", function(req, res) {
 			  				console.log(JSON.parse(body).result);
 							res.render("schedule.ejs", {
 								data: JSON.parse(body).result,
-								reviews: reviews
+								reviews: reviews,
+								alerts: req.flash()
 							});
 			  			}
 					});
@@ -195,6 +197,17 @@ app.post("/schedule/review", function(req, res) {
 	});
 })
 
+// Deletes review from db
+app.delete("/schedule/review/:id", function(req, res) {
+	db.Reviews.destroy({
+		where: {
+			id: req.params.id
+		}
+	}).then(function() {
+		req.flash("success", "Review was deleted successfully!");
+		res.send("Review was deleted successfully!")
+	});
+});
 
 // Changing Password code, finishing when I have more time..
 // app.post("/settings/password", function(req, res) {
