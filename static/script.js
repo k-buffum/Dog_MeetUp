@@ -83,7 +83,10 @@ function addMarker(place) {
 			$(".parkWebsite").html("Website: " + placeData.website);
 
 			if (placeData.rating) {
-				$(".parkRating").html("Rating: " + placeData.rating);
+				$(".parkRating").html("Rating: ")
+				for (var i = 0; i < placeData.rating; i++) {
+					$(".parkRating").append("<i class='glyphicon glyphicon-star'></i>");
+				}
 			}
 
 			if (placeData.opening_hours && placeData.opening_hours.weekday_text) {

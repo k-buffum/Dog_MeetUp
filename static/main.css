@@ -81,3 +81,7 @@ select {
     -moz-pointer-events: none;
     pointer-events: none;
 }
+
+.glyphicon-star {
+	color: gold;
+}
