@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
     locationId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
     reviews: DataTypes.STRING,
-    rating: DataTypes.INTEGER
+    rating: DataTypes.INTEGER,
+    placeId: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {

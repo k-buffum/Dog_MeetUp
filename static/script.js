@@ -1,6 +1,3 @@
-
-var apiKey = "AIzaSyCH-nHN7w5zeHRSlPzCRN8MYuL6XfaJlkY";
-
 // var exports = module.exports = {}
 var service;
 var map;
@@ -99,13 +96,6 @@ function addMarker(place) {
 	});
 }
 
-// function showPlaceDetails(place) {
-//     infoWindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-//       	'Place ID: ' + place.place_id + '<br>' +
-//       	place.formatted_address + '</div>');
-//     infoWindow.open(map, this);
-// }
-
 function locationError(browserHasGeolocation, infoWindow, pos) {
 	infoWindow.setPosition(pos);
 	infoWindow.setContent(browserHasGeolocation ?
@@ -117,7 +107,8 @@ function locationError(browserHasGeolocation, infoWindow, pos) {
 $(document).ready(function() {
 	$.ajax("/api/schedule")
 	.done(function(data) {
-		console.log(data);
+		// console.log(data);
+		// Sets up graph to display current information
 		var ctx = document.getElementById("myChart").getContext("2d");
 		var time = data.map(function(schedule) {
 			return schedule.time;
@@ -161,7 +152,9 @@ $(document).ready(function() {
 		});
 		document.getElementById("legend").innerHTML = myBarChart.generateLegend();
 	});	
-})
+});
+
+
 
 
 

@@ -2,3 +2,43 @@
 
 <canvas id="myChart" width="400" height="400"></canvas>
 <div id="legend"></div>
+
+<div class="description container">
+	<h2>Description: </h2>
+	<p>Rating: <%= data.rating %></p>
+  	<p>Phone: <%= data.formatted_phone_number %></p>
+    <p>Address: <%= data.formatted_address %></p>
+    <p>Hours: <%= data.opening_hours.weekday_text %></p>
+    <p>Website: <a href="<%= data.website %>"><%= data.website %></a></p>
+</div>
+
+<div class="container">
+	<form method="POST" action="/schedule/review">
+		<div>
+			<label name="username"><%= currentUser.username %></label>
+			<input type="hidden" value="<%= currentUser.id %>" name="userId">
+			<input type="hidden" value="<%= data.place_id %>" name="placeId">
+		</div>
+		<div>
+			<label name="rating">Rating</label>
+			<input type="number" name="rating" id="rating">
+		</div>
+		<div>
+			<label name="review">Review</label>
+			<input type="text" name="review" id="review">
+		</div>
+		<input type="submit" value="Speak!">
+	</form>
+</div>
+
+<div class="container">
+	<h2>Reviews:</h2>
+	<% data.reviews.forEach(function(review) { %>
+	<div class="container">
+		<h4>User: <%= review.author_name %></h4>
+		<h5>Rating: <%= review.rating %></h5>
+		<p>Review: <%= review.text %></p>
+		___________________________________________________________________
+	</div>
+	<% }) %>
+</div>

@@ -16,6 +16,7 @@
     "express": "^4.13.4",
     "express-ejs-layouts": "^2.0.0",
     "express-session": "^1.13.0",
+    "foreman": "^1.4.1",
     "geocoder": "^0.2.2",
     "google-places": "0.0.2",
     "pg": "^4.4.6",

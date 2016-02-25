@@ -6,6 +6,8 @@ var session= require("express-session");
 var flash = require("connect-flash");
 var db = require("./models");
 var app = express();
+var request = require('request');
+var port = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
 
@@ -86,19 +88,26 @@ app.post("/schedule", function(req, res) {
 
 // Schedule page
 app.get("/schedule", function(req, res) {
+	// Finds user in User table by userId
 	db.User.findById(res.locals.currentUser.id)
 	.then(function(user) {
-		console.log(user);
+		// Finds user's schedule by scheduleId
 		db.Schedule.findById(user.scheduleId)
 		.then(function(schedule) {
+			// Find all schedules with the same placeId
 			db.Schedule.findAll({
 				where: {
 					placeId: schedule.placeId
 				}
 			}).then(function(schedules) {
-				console.log(schedules);
-				res.render("schedule.ejs", {
-					schedules: schedules	
+				// Adds google places details under graph
+				request('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + schedules[0].placeId + '&key=' + process.env.GOOGLE_KEY, function (error, response, body) {
+	  			if (!error && response.statusCode == 200) {
+						res.render("schedule.ejs", {
+							schedules: schedules,
+							data: JSON.parse(body).result
+						});
+	  			}
 				});
 			});			
 		});
@@ -107,9 +116,9 @@ app.get("/schedule", function(req, res) {
 
 // Sends schedule info to frontend ajax request
 app.get("/api/schedule", function(req, res) {
+	// Finds user by userID in
 	db.User.findById(res.locals.currentUser.id)
 	.then(function(user) {
-		console.log(user);
 		db.Schedule.findById(user.scheduleId)
 		.then(function(schedule) {
 			db.Schedule.findAll({
@@ -117,7 +126,7 @@ app.get("/api/schedule", function(req, res) {
 					placeId: schedule.placeId
 				}
 			}).then(function(schedules) {
-				console.log(schedules);
+				// console.log(schedules);
 				res.send(schedules);
 
 			});			
@@ -145,7 +154,7 @@ app.post("/settings", function(req, res) {
 			userId: userId
 		}
 	}).then(function(schedule){
-		console.log(schedule);
+		// console.log(schedule);
 		schedule.updateAttributes({
 			smallDogs: smallDogs,
 			mediumDogs: mediumDogs,
@@ -156,6 +165,24 @@ app.post("/settings", function(req, res) {
 		});
 	});
 });
+
+app.post("/schedule/review", function(req, res) {
+	var placeId = req.body.placeId
+	var userId = req.body.userId
+	var rating = req.body.rating
+	var review = req.body.review
+
+	console.log(req.body.userId);
+
+	db.Reviews.create({
+		placeId: placeId,
+		userId: userId,
+		rating: rating,
+		reviews: review
+	}).then(function(data) {
+		res.redirect("/schedule");
+	});
+})
 
 
 // Changing Password code, finishing when I have more time..
@@ -182,6 +209,6 @@ app.post("/settings", function(req, res) {
 // })
 
 app.use("/auth", require("./controllers/auth"));
-app.listen(3000);
+app.listen(port);
 
 
