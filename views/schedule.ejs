@@ -17,6 +17,7 @@
 		<div>
 			<label name="username"><%= currentUser.username %></label>
 			<input type="hidden" value="<%= currentUser.id %>" name="userId">
+			<input type="hidden" value="<%= currentUser.username %>" name="username">
 			<input type="hidden" value="<%= data.place_id %>" name="placeId">
 		</div>
 		<div>
@@ -33,6 +34,15 @@
 
 <div class="container">
 	<h2>Reviews:</h2>
+	<% reviews.forEach(function(review) { %>
+	<div class="container">
+		<h4>User: <%= review.username %></h4>
+		<h5>Rating: <%= review.rating %></h5>
+		<p>Review: <%= review.reviews %></p>
+		___________________________________________________________________
+	</div>
+	<% }) %>
+
 	<% data.reviews.forEach(function(review) { %>
 	<div class="container">
 		<h4>User: <%= review.author_name %></h4>

@@ -100,14 +100,23 @@ app.get("/schedule", function(req, res) {
 					placeId: schedule.placeId
 				}
 			}).then(function(schedules) {
-				// Adds google places details under graph
-				request('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + schedules[0].placeId + '&key=' + process.env.GOOGLE_KEY, function (error, response, body) {
-	  			if (!error && response.statusCode == 200) {
-						res.render("schedule.ejs", {
-							schedules: schedules,
-							data: JSON.parse(body).result
-						});
-	  			}
+				// Finds reviews based on the placeId of park
+				db.Reviews.findAll({
+					where: {
+						placeId: schedules[0].placeId
+					}
+				}).then(function(reviews) {
+					console.log(reviews);
+					// Adds google places details under graph
+					request('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + schedules[0].placeId + '&key=' + process.env.GOOGLE_KEY, function (error, response, body) {
+		  			if (!error && response.statusCode == 200) {
+							res.render("schedule.ejs", {
+								schedules: schedules,
+								data: JSON.parse(body).result,
+								reviews: reviews
+							});
+		  			}
+					});
 				});
 			});			
 		});
@@ -171,6 +180,7 @@ app.post("/schedule/review", function(req, res) {
 	var userId = req.body.userId
 	var rating = req.body.rating
 	var review = req.body.review
+	var username = req.body.username
 
 	console.log(req.body.userId);
 
@@ -178,7 +188,8 @@ app.post("/schedule/review", function(req, res) {
 		placeId: placeId,
 		userId: userId,
 		rating: rating,
-		reviews: review
+		reviews: review,
+		username: username
 	}).then(function(data) {
 		res.redirect("/schedule");
 	});
