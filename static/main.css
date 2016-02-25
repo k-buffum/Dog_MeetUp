@@ -50,6 +50,7 @@ select {
 {
     unicode-bidi: bidi-override;
     direction: rtl;
+   	display: -webkit-inline-box;
 }
  
 .acidjs-rating-stars label
@@ -75,7 +76,7 @@ select {
 .acidjs-rating-disabled
 {
     opacity: .50;
-     
+    display: -webkit-inline-box;
     -webkit-pointer-events: none;
     -moz-pointer-events: none;
     pointer-events: none;

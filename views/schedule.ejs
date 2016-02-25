@@ -23,7 +23,7 @@
 		</div>
 		<div>
 			<label name="rating">Rating</label>
-			<div class="acidjs-rating-stars" style="display: -webkit-inline-box">
+			<div class="acidjs-rating-stars">
 		        <input type="radio" name="rating" id="group-1-0" value="5" /><label for="group-1-0"></label>
 		        <input type="radio" name="rating" id="group-1-1" value="4" /><label for="group-1-1"></label>
 		        <input type="radio" name="rating" id="group-1-2" value="3" /><label for="group-1-2"></label>
@@ -44,7 +44,16 @@
 	<% reviews.forEach(function(review) { %>
 	<div class="container">
 		<h4>User: <%= review.username %></h4>
-		<h5>Rating: <%= review.rating %></h5>
+		<h5>Rating:</h5>
+		<div class="acidjs-rating-stars acidjs-rating-disabled">
+			<form style="display: -webkit-inline-box">
+		        <input disabled="disabled" type="radio" <%if(review.rating === 5) { %> checked="checked" <% } %> name="group-3" id="group-3-0" value="5" /><label for="group-3-0"></label>
+		        <input disabled="disabled" type="radio" <%if(review.rating === 4) { %> checked="checked" <% } %> name="group-3" id="group-3-1" value="4" /><label for="group-3-1"></label>
+		        <input disabled="disabled" type="radio" <%if(review.rating === 3) { %> checked="checked" <% } %> name="group-3" id="group-3-2" value="3" /><label for="group-3-2"></label>
+		        <input disabled="disabled" type="radio" <%if(review.rating === 2) { %> checked="checked" <% } %> name="group-3" id="group-3-3" value="2" /><label for="group-3-3"></label>
+		        <input disabled="disabled" type="radio" <%if(review.rating === 1) { %> checked="checked" <% } %> name="group-3" id="group-3-4"  value="1" /><label for="group-3-4"></label>
+	        </form>
+		</div>
 		<p>Review: <%= review.reviews %></p>
 		___________________________________________________________________
 	</div>
@@ -53,7 +62,16 @@
 	<% data.reviews.forEach(function(review) { %>
 	<div class="container">
 		<h4>User: <%= review.author_name %></h4>
-		<h5>Rating: <%= review.rating %></h5>
+		<h5>Rating:</h5>
+		<div class="acidjs-rating-stars acidjs-rating-disabled">
+			<form style="display: -webkit-inline-box">
+		        <input disabled="disabled" type="radio" <%if(review.rating === 5) { %> checked="checked" <% } %> name="group-3" id="group-3-0" value="5" /><label for="group-3-0"></label>
+		        <input disabled="disabled" type="radio" <%if(review.rating === 4) { %> checked="checked" <% } %> name="group-3" id="group-3-1" value="4" /><label for="group-3-1"></label>
+		        <input disabled="disabled" type="radio" <%if(review.rating === 3) { %> checked="checked" <% } %> name="group-3" id="group-3-2" value="3" /><label for="group-3-2"></label>
+		        <input disabled="disabled" type="radio" <%if(review.rating === 2) { %> checked="checked" <% } %> name="group-3" id="group-3-3" value="2" /><label for="group-3-3"></label>
+		        <input disabled="disabled" type="radio" <%if(review.rating === 1) { %> checked="checked" <% } %> name="group-3" id="group-3-4"  value="1" /><label for="group-3-4"></label>
+	        </form>
+		</div>
 		<p>Review: <%= review.text %></p>
 		___________________________________________________________________
 	</div>
