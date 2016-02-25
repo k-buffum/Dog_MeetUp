@@ -28,7 +28,7 @@ app.use(flash());
 // if user not logged in, currentUser is set to false
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 app.use(function(req, res, next) {
-	req.session.userId = 1;
+	// req.session.userId = 1;
 	if (req.session.userId) {
 		db.User.findById(req.session.userId).then(function(user) {
 			req.currentUser = user;
@@ -61,21 +61,22 @@ app.post("/schedule", function(req, res) {
 					time: req.body.time
 				}
 			}).spread(function(schedule, created) {
-				var userId = res.locals.currentUser.id
-				db.Schedule.find({
-					where: {
-						userId: userId
-					}
-				})
-				.then(function(user) {
-					// If user has already scheduled a time, it updates time and location with new values
-					user.updateAttributes({
+				var userId = res.locals.currentUser.id;
+
+				if (created) {
+					req.currentUser.scheduleId = schedule.id;
+					req.currentUser.save().then(function() {
+						res.redirect("/schedule");
+					});
+				} else {
+					schedule.updateAttributes({
 						placeId: req.body.parkId,
 						location: req.body.parkName,
 						time: req.body.time
+					}).then(function() {
+						res.redirect("/schedule");
 					});
-				});
-				res.redirect("/schedule");
+				}
 			});
 		} else {
 			req.flash("danger", "You must select a location to continue.");

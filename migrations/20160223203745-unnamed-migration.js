@@ -27,5 +27,14 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
+    queryInterface.removeColumn(
+     'Users',
+     'smallDogs');
+    queryInterface.removeColumn(
+     'Users',
+     'mediumDogs');
+    queryInterface.removeColumn(
+     'Users',
+     'largeDogs');
   }
 };
