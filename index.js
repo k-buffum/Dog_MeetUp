@@ -96,26 +96,26 @@ app.get("/schedule", function(req, res) {
 		db.Schedule.findById(user.scheduleId)
 		.then(function(schedule) {
 			// Find all schedules with the same placeId
-			db.Schedule.findAll({
+			db.Schedule.find({
 				where: {
 					placeId: schedule.placeId
 				}
-			}).then(function(schedules) {
+			}).then(function(schedule) {
 				// Finds reviews based on the placeId of park
 				db.Reviews.findAll({
 					where: {
-						placeId: schedules[0].placeId
+						placeId: schedule.placeId
 					}
 				}).then(function(reviews) {
 					// Adds google places details under graph
-					request('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + schedules[0].placeId + '&key=' + process.env.GOOGLE_KEY, function (error, response, body) {
-		  			if (!error && response.statusCode == 200) {
+					request('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + schedule.placeId + '&key=' + process.env.GOOGLE_KEY, function (error, response, body) {
+			  			if (!error && response.statusCode == 200) {
+			  				console.log(JSON.parse(body).result);
 							res.render("schedule.ejs", {
-								schedules: schedules,
 								data: JSON.parse(body).result,
 								reviews: reviews
 							});
-		  			}
+			  			}
 					});
 				});
 			});			

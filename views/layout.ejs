@@ -45,9 +45,6 @@
 	</nav>
 
 	<div>
-		<div>
-			Current user: <%= currentUser.username %>
-		</div>
 		<% if (typeof alerts !== 'undefined') { %>
 		  <% for (key in alerts) { %>
 		    <% alerts[key].forEach(function(thisMsg) { %>

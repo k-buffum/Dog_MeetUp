@@ -103,54 +103,62 @@ function locationError(browserHasGeolocation, infoWindow, pos) {
 				'Error: Your browser doesn\'t support geolocation.');
 }
 
-
+// Sets up graph to display current information
 $(document).ready(function() {
 	$.ajax("/api/schedule")
 	.done(function(data) {
-		// console.log(data);
-		// Sets up graph to display current information
 		var ctx = document.getElementById("myChart").getContext("2d");
-		var time = data.map(function(schedule) {
-			return schedule.time;
-		});
-		var smallDogs = {
-			label: "Small Dogs",
+		var time = ["7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00"];
+		var numDogs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		
+		for (var i = 0; i < data.length; i++) {
+			if (data[i].time < "07:00:00") {
+				// Avoids have to do 2 checks in each if(data[i].time > "07:00:00")
+			} else if (data[i].time < "08:00:00") {
+				numDogs[0] += data[i].smallDogs + data[i].mediumDogs + data[i].largeDogs;
+			} else if (data[i].time < "09:00:00") {
+				numDogs[1] += data[i].smallDogs + data[i].mediumDogs + data[i].largeDogs;
+			} else if (data[i].time < "10:00:00") {
+				numDogs[2] += data[i].smallDogs + data[i].mediumDogs + data[i].largeDogs;
+			} else if (data[i].time < "11:00:00") {
+				numDogs[3] += data[i].smallDogs + data[i].mediumDogs + data[i].largeDogs;
+			}  else if (data[i].time < "12:00:00") {
+				numDogs[4] += data[i].smallDogs + data[i].mediumDogs + data[i].largeDogs;
+			} else if (data[i].time < "13:00:00") {
+				numDogs[5] += data[i].smallDogs + data[i].mediumDogs + data[i].largeDogs;
+			} else if (data[i].time < "14:00:00") {
+				numDogs[6] += data[i].smallDogs + data[i].mediumDogs + data[i].largeDogs;
+			} else if (data[i].time < "15:00:00") {
+				numDogs[7] += data[i].smallDogs + data[i].mediumDogs + data[i].largeDogs;
+			}  else if (data[i].time < "16:00:00") {
+				numDogs[8] += data[i].smallDogs + data[i].mediumDogs + data[i].largeDogs;
+			} else if (data[i].time < "17:00:00") {
+				numDogs[9] += data[i].smallDogs + data[i].mediumDogs + data[i].largeDogs;
+			} else if (data[i].time < "18:00:00") {
+				numDogs[10] += data[i].smallDogs + data[i].mediumDogs + data[i].largeDogs;
+			} else if (data[i].time < "19:00:00") {
+				numDogs[11] += data[i].smallDogs + data[i].mediumDogs + data[i].largeDogs;
+			}  else if (data[i].time < "20:00:00") {
+				numDogs[12] += data[i].smallDogs + data[i].mediumDogs + data[i].largeDogs;
+			}
+		}
+
+		var dogs = {
+			label: "dogs",
 			fillColor: "rgba(255, 121, 44, 0.4)",
 			strokeColor: "rgba(255, 121, 44, 0.8)",
 			highlightFill: "rgba(255, 121, 44, 0.75)" ,
 			highlightStroke: "rgba(255, 121, 44, 1)",
-			data: data.map(function(schedule) {
-				return schedule.smallDogs;
-			})
+			data: numDogs
 		}
-		var mediumDogs = {
-			label: "Medium Dogs",
-			fillColor: "rgba(73, 121, 44, 0.4)",
-			strokeColor: "rgba(73, 121, 44, 0.8)",
-			highlightFill: "rgba(73, 121, 44, 0.75)",
-			highlightStroke: "rgba(73, 121, 44, 1)",
-			data: data.map(function(schedule) {
-				return schedule.mediumDogs;
-			})
-		}
-		var largeDogs = {
-			label: "Large Dogs",
-			fillColor: "rgba(35, 79, 126, 0.4)",
-			strokeColor: "rgba(35, 79, 126, 0.8)",
-			highlightFill: "rgba(35, 79, 126, 0.75)",
-			highlightStroke: "rgba(35, 79, 126, 1)",
-			data: data.map(function(schedule) {
-				return schedule.largeDogs;
-			})
-		}
+
 		var chartData = {
 			labels: time,
-			datasets: [smallDogs, mediumDogs, largeDogs]
+			datasets: [dogs]
 		};
 		var myBarChart = new Chart(ctx).Bar(chartData, {
-			legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li style=\"background-color:<%=datasets[i].fillColor%>\"><span></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+		   tooltipTemplate: "Dogs: <%= value %>"
 		});
-		document.getElementById("legend").innerHTML = myBarChart.generateLegend();
 	});	
 });
 
