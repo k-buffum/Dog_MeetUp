@@ -2,22 +2,12 @@
 Basic styling
 *******************************/
 
-body {
-    background-image: url(./images/paw-print-220231_640.jpg);
-}
-
-.navbar {
-    background-color: rgba(35, 23, 1, 0.7);
-}
-
-.navbar-header .navbar-brand, ul.navbar-nav.navbar-right li a {
-    color: white;
+h1 {
+    text-align: center;
 }
 
 #mainPageH1 {
-    color: white;
     text-align: center;
-    text-shadow: 1px 1px 1px #000;
 }
 
 
@@ -26,12 +16,14 @@ body {
 Main page
 *******************************/
 
-.description, .description a {
-    background-color: rgba(255, 122, 0, 0.6);
-    color: white;
-    margin: 12% 0;
-    text-shadow: 1px 1px 1px #000;
-    width: 500px;
+.description {
+    max-width: 500px;
+}
+
+@media screen and (min-width: 992px) {
+    .description {
+        margin-top: 85px;
+    }
 }
 
 #submitTimeLocation {
@@ -49,44 +41,25 @@ Main page
 Register & login page
 *******************************/
 
-input {
-    background-color: #0F81B2;
-}
-
 .inputLabel {
     display: block;
     margin-top: 5px;
     margin-bottom: 2px;
 }
 
-#registerText, #registerHeader, #registerSubmit, #loginHeader, #loginSubmit {
-    color: #0F81B2;
+#registerText, #registerSubmit, #loginSubmit {
     text-align: center;
-    font-weight: bold;
 }
 
-#registerHeader, #loginHeader {
-    text-shadow: 1px 1px black;
-}
 
-#registerContainer, #registerPage, #loginContainer, #loginPage {
+#registerContainer, #registerPage, #loginContainer, #loginPage, #dogContainer {
     text-align: center;
 }
 
 #registerContainer, #loginContainer {
-    background-color: rgba(226, 171, 72, 0.8);
     width: 300px;
     margin: 0 auto;
     padding: 10px 0 10px 0;
-}
-
- #registerSubmit, #loginSubmit {
-    background-color: #48C8FF;
-    color: #000;
- }
-
-#usernameLabel, #emailLabel {
-    /*margin: 0;*/
 }
 
 
@@ -134,13 +107,53 @@ Schedule page
     text-align: -webkit-center;
 }
 
-#schedulePageContainer {
-    background-color: rgba(255, 122, 0, 0.6);
-    color: white;
+#review {
+    margin-top: 2px;
     max-width: 500px;
-    text-shadow: 1px 1px 1px #000;
+    width: 100%;
 }
 
+#schedulePageContainer {
+    max-width: 500px;
+}
+
+
+
+/****************************
+Settings page
+*****************************/
+
+.dogLabels {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 2px;
+}
+
+.dogSelectors {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+#dogSubmit {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#lrgDogImg {
+    max-width: 100px;
+}
+
+#medDogImg {
+    max-width: 75px;
+}
+
+#smlDogImg {
+    max-width: 50px;
+}
+
+.numDogSelector {
+    width: 100px;
+}
 
 /****************************
 Rating star styling
