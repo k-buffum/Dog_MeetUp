@@ -2,6 +2,10 @@
 Basic styling
 *******************************/
 
+body {
+    background-color: mintcream;
+}
+
 h1 {
     text-align: center;
 }
@@ -10,6 +14,9 @@ h1 {
     text-align: center;
 }
 
+.navbar {
+    background-color: #EDFFFF;
+}
 
 
 /******************************
@@ -102,6 +109,10 @@ select {
 /****************************
 Schedule page
 *****************************/
+
+.delete-link {
+    color: #FF4F4F;
+}
 
 #schedulePage {
     text-align: -webkit-center;

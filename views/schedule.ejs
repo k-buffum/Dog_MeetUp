@@ -56,7 +56,7 @@
 				</div>
 				<p><%= review.reviews %></p>
 				<% if(currentUser.id == review.userId) { %>
-					<a href="/schedule/review/<%= review.id %>" class="delete-link">Delete</a>
+					<button><a href="/schedule/review/<%= review.id %>" class="delete-link">Delete</a></button>
 				<% } %>
 				___________________________________________________________________
 			</div>
