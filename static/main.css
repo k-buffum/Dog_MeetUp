@@ -2,6 +2,10 @@
 Basic styling
 *******************************/
 
+a {
+    color: black;
+}
+
 body {
     background-color: mintcream;
 }
