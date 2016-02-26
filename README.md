@@ -31,3 +31,4 @@ This project required a lot of planning and preperation to include the different
 ### Known Problems
 * Graph does not display number of small, medium, and large dogs
 * Map search does not include most dog parks
+* Database does not clear data from previous day, resulting in skewed data on the graph
