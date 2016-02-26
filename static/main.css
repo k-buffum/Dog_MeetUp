@@ -15,15 +15,24 @@ body {
 }
 
 #mainPageH1 {
-    text-align: center;
     color: white;
+    text-align: center;
     text-shadow: 1px 1px 1px #000;
 }
+
 
 
 /******************************
 Main page
 *******************************/
+
+.description, .description a {
+    background-color: rgba(255, 122, 0, 0.6);
+    color: white;
+    margin: 12% 0;
+    text-shadow: 1px 1px 1px #000;
+    width: 500px;
+}
 
 #submitTimeLocation {
     display: -webkit-box;
@@ -34,78 +43,111 @@ Main page
     margin: 30px 0 30px 10px;
 }
 
-.description, .description a {
-    background-color: rgba(255, 122, 0, 0.6);
-    color: white;
-    width: 500px;
-    margin: 12% 0;
-    text-shadow: 1px 1px 1px #000;
-}
+
 
 /******************************
-Register page
+Register & login page
 *******************************/
 
-#registerText, #registerHeader, #registerSubmit {
+input {
+    background-color: #0F81B2;
+}
+
+.inputLabel {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 2px;
+}
+
+#registerText, #registerHeader, #registerSubmit, #loginHeader, #loginSubmit {
     color: #0F81B2;
     text-align: center;
     font-weight: bold;
 }
 
-#registerHeader {
+#registerHeader, #loginHeader {
     text-shadow: 1px 1px black;
 }
 
-#registerContainer, #registerPage {
+#registerContainer, #registerPage, #loginContainer, #loginPage {
     text-align: center;
 }
 
-#registerContainer {
+#registerContainer, #loginContainer {
     background-color: rgba(226, 171, 72, 0.8);
     width: 300px;
     margin: 0 auto;
     padding: 10px 0 10px 0;
 }
 
-#usernameLabel {
-    margin: 0;
-}
-
-input {
-    background-color: #0F81B2;
-}
- #registerSubmit {
+ #registerSubmit, #loginSubmit {
     background-color: #48C8FF;
     color: #000;
  }
+
+#usernameLabel, #emailLabel {
+    /*margin: 0;*/
+}
+
+
+
+/******************************
+Login page
+******************************/
+
+#loginSubmit {
+    margin-top: 10px;
+}
+
 
 
 /******************************
 Map styling
 ******************************/
+
 #map {
-	width: 500px;
-	height:400px;
+    width: 500px;
+    height:400px;
 }
 
 fieldset {
-	border: 0;
+    border: 0;
 }
 
-label {
-	display: block;
-	margin: 30px 0 0 0;
+#timeLabel {
+    display: block;
+    margin: 30px 0 0 0;
 }
+
 
 select {
-	width: 200px;
+    width: 200px;
 }
+
+
+
+/****************************
+Schedule page
+*****************************/
+
+#schedulePage {
+    text-align: -webkit-center;
+}
+
+#schedulePageContainer {
+    background-color: rgba(255, 122, 0, 0.6);
+    color: white;
+    max-width: 500px;
+    text-shadow: 1px 1px 1px #000;
+}
+
 
 /****************************
 Rating star styling
 *****************************/
+
 .overflow {
-	height: 200px;
+    height: 200px;
 }
 
 .acidjs-rating-stars,

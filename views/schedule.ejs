@@ -1,82 +1,86 @@
-<h1><%= data.name %></h1>
+<div id="schedulePage">
+	<div id="schedulePageContainer">
+		<h1><%= data.name %></h1>
 
-<canvas id="myChart" height="400" width="400"></canvas>
+		<canvas id="myChart" height="400" width="400"></canvas>
 
-<div id="legend"></div>
+		<div id="legend"></div>
 
-<div class="description container">
-	<h2>Description: </h2>
-	<p>Rating: <%= data.rating %></p>
-  	<p>Phone: <%= data.formatted_phone_number %></p>
-    <p>Address: <%= data.formatted_address %></p>
-    <p>Hours: <%= data.opening_hours.weekday_text %></p>
-    <p>Website: <a href="<%= data.website %>"><%= data.website %></a></p>
-</div>
-
-<div class="container">
-	<form method="POST" action="/schedule/review">
 		<div>
-			<label name="username"><%= currentUser.username %></label>
-			<input type="hidden" value="<%= currentUser.id %>" name="userId">
-			<input type="hidden" value="<%= currentUser.username %>" name="username">
-			<input type="hidden" value="<%= data.place_id %>" name="placeId">
+			<h2>Description: </h2>
+			<p>Rating: <%= data.rating %></p>
+		  	<p>Phone: <%= data.formatted_phone_number %></p>
+		    <p>Address: <%= data.formatted_address %></p>
+		    <p>Hours: <%= data.opening_hours.weekday_text %></p>
+		    <p>Website: <a href="<%= data.website %>"><%= data.website %></a></p>
 		</div>
+
 		<div>
-			<label name="rating">Rating</label>
-			<div class="acidjs-rating-stars">
-		        <input type="radio" name="rating" id="group-1-0" value="5" /><label for="group-1-0"></label>
-		        <input type="radio" name="rating" id="group-1-1" value="4" /><label for="group-1-1"></label>
-		        <input type="radio" name="rating" id="group-1-2" value="3" /><label for="group-1-2"></label>
-		        <input type="radio" name="rating" id="group-1-3" value="2" /><label for="group-1-3"></label>
-		        <input type="radio" name="rating" id="group-1-4"  value="1" /><label for="group-1-4"></label>
+			<form method="POST" action="/schedule/review">
+				<div>
+					<label name="username"><%= currentUser.username %></label>
+					<input type="hidden" value="<%= currentUser.id %>" name="userId">
+					<input type="hidden" value="<%= currentUser.username %>" name="username">
+					<input type="hidden" value="<%= data.place_id %>" name="placeId">
+				</div>
+				<div>
+					<label name="rating">Rating</label>
+					<div class="acidjs-rating-stars">
+				        <input type="radio" name="rating" id="group-1-0" value="5" /><label for="group-1-0"></label>
+				        <input type="radio" name="rating" id="group-1-1" value="4" /><label for="group-1-1"></label>
+				        <input type="radio" name="rating" id="group-1-2" value="3" /><label for="group-1-2"></label>
+				        <input type="radio" name="rating" id="group-1-3" value="2" /><label for="group-1-3"></label>
+				        <input type="radio" name="rating" id="group-1-4"  value="1" /><label for="group-1-4"></label>
+					</div>
+				</div>
+				<div>
+					<label name="review">Review</label>
+					<input type="text" name="review" id="review">
+				</div>
+				<input type="submit" value="Speak!">
+			</form>
+		</div>
+
+		<div>
+			<h2>Reviews:</h2>
+			<% reviews.forEach(function(review) { %>
+			<div>
+				<h4>User: <%= review.username %></h4>
+				<h5>Rating:</h5>
+				<div class="acidjs-rating-stars acidjs-rating-disabled">
+					<form style="display: -webkit-inline-box">
+				        <input disabled="disabled" type="radio" <%if(review.rating === 5) { %> checked="checked" <% } %> name="group-3" id="group-3-0" value="5" /><label for="group-3-0"></label>
+				        <input disabled="disabled" type="radio" <%if(review.rating === 4) { %> checked="checked" <% } %> name="group-3" id="group-3-1" value="4" /><label for="group-3-1"></label>
+				        <input disabled="disabled" type="radio" <%if(review.rating === 3) { %> checked="checked" <% } %> name="group-3" id="group-3-2" value="3" /><label for="group-3-2"></label>
+				        <input disabled="disabled" type="radio" <%if(review.rating === 2) { %> checked="checked" <% } %> name="group-3" id="group-3-3" value="2" /><label for="group-3-3"></label>
+				        <input disabled="disabled" type="radio" <%if(review.rating === 1) { %> checked="checked" <% } %> name="group-3" id="group-3-4"  value="1" /><label for="group-3-4"></label>
+			        </form>
+				</div>
+				<p>Review: <%= review.reviews %></p>
+				<% if(currentUser.id == review.userId) { %>
+					<a href="/schedule/review/<%= review.id %>" class="delete-link">Delete</a>
+				<% } %>
+				___________________________________________________________________
 			</div>
-		</div>
-		<div>
-			<label name="review">Review</label>
-			<input type="text" name="review" id="review">
-		</div>
-		<input type="submit" value="Speak!">
-	</form>
-</div>
+			<% }) %>
 
-<div class="container">
-	<h2>Reviews:</h2>
-	<% reviews.forEach(function(review) { %>
-	<div class="container">
-		<h4>User: <%= review.username %></h4>
-		<h5>Rating:</h5>
-		<div class="acidjs-rating-stars acidjs-rating-disabled">
-			<form style="display: -webkit-inline-box">
-		        <input disabled="disabled" type="radio" <%if(review.rating === 5) { %> checked="checked" <% } %> name="group-3" id="group-3-0" value="5" /><label for="group-3-0"></label>
-		        <input disabled="disabled" type="radio" <%if(review.rating === 4) { %> checked="checked" <% } %> name="group-3" id="group-3-1" value="4" /><label for="group-3-1"></label>
-		        <input disabled="disabled" type="radio" <%if(review.rating === 3) { %> checked="checked" <% } %> name="group-3" id="group-3-2" value="3" /><label for="group-3-2"></label>
-		        <input disabled="disabled" type="radio" <%if(review.rating === 2) { %> checked="checked" <% } %> name="group-3" id="group-3-3" value="2" /><label for="group-3-3"></label>
-		        <input disabled="disabled" type="radio" <%if(review.rating === 1) { %> checked="checked" <% } %> name="group-3" id="group-3-4"  value="1" /><label for="group-3-4"></label>
-	        </form>
+			<% data.reviews.forEach(function(review) { %>
+			<div>
+				<h4>User: <%= review.author_name %></h4>
+				<h5>Rating:</h5>
+				<div class="acidjs-rating-stars acidjs-rating-disabled">
+					<form style="display: -webkit-inline-box">
+				        <input disabled="disabled" type="radio" <%if(review.rating === 5) { %> checked="checked" <% } %> name="group-3" id="group-3-0" value="5" /><label for="group-3-0"></label>
+				        <input disabled="disabled" type="radio" <%if(review.rating === 4) { %> checked="checked" <% } %> name="group-3" id="group-3-1" value="4" /><label for="group-3-1"></label>
+				        <input disabled="disabled" type="radio" <%if(review.rating === 3) { %> checked="checked" <% } %> name="group-3" id="group-3-2" value="3" /><label for="group-3-2"></label>
+				        <input disabled="disabled" type="radio" <%if(review.rating === 2) { %> checked="checked" <% } %> name="group-3" id="group-3-3" value="2" /><label for="group-3-3"></label>
+				        <input disabled="disabled" type="radio" <%if(review.rating === 1) { %> checked="checked" <% } %> name="group-3" id="group-3-4"  value="1" /><label for="group-3-4"></label>
+			        </form>
+				</div>
+				<p>Review: <%= review.text %></p>
+				___________________________________________________________________
+			</div>
+			<% }) %>
 		</div>
-		<p>Review: <%= review.reviews %></p>
-		<% if(currentUser.id == review.userId) { %>
-			<a href="/schedule/review/<%= review.id %>" class="delete-link">Delete</a>
-		<% } %>
-		___________________________________________________________________
 	</div>
-	<% }) %>
-
-	<% data.reviews.forEach(function(review) { %>
-	<div class="container">
-		<h4>User: <%= review.author_name %></h4>
-		<h5>Rating:</h5>
-		<div class="acidjs-rating-stars acidjs-rating-disabled">
-			<form style="display: -webkit-inline-box">
-		        <input disabled="disabled" type="radio" <%if(review.rating === 5) { %> checked="checked" <% } %> name="group-3" id="group-3-0" value="5" /><label for="group-3-0"></label>
-		        <input disabled="disabled" type="radio" <%if(review.rating === 4) { %> checked="checked" <% } %> name="group-3" id="group-3-1" value="4" /><label for="group-3-1"></label>
-		        <input disabled="disabled" type="radio" <%if(review.rating === 3) { %> checked="checked" <% } %> name="group-3" id="group-3-2" value="3" /><label for="group-3-2"></label>
-		        <input disabled="disabled" type="radio" <%if(review.rating === 2) { %> checked="checked" <% } %> name="group-3" id="group-3-3" value="2" /><label for="group-3-3"></label>
-		        <input disabled="disabled" type="radio" <%if(review.rating === 1) { %> checked="checked" <% } %> name="group-3" id="group-3-4"  value="1" /><label for="group-3-4"></label>
-	        </form>
-		</div>
-		<p>Review: <%= review.text %></p>
-		___________________________________________________________________
-	</div>
-	<% }) %>
 </div>
