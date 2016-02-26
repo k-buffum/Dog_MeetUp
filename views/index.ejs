@@ -1,24 +1,34 @@
 <h1>Welcome to Dog MeetUp</h1>
 
-<form method="POST" action="/schedule">
-	<p><label>Time: <input name="time" type="time" id="time"></label></p>
-	<input type="hidden" name="parkName" id="park-name">
-	<input type="hidden" name="parkId" id="park-id">
-	<input type="submit" value="Submit">
-</form>
 
-<div id="map"></div>
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+  <div class="center-block">
+		<form method="POST" action="/schedule" id="submitTimeLocation" class="center-block">
+			<p><label>Time: <input name="time" type="time" id="time"></label></p>
+			<input type="hidden" name="parkName" id="park-name">
+			<input type="hidden" name="parkId" id="park-id">
+			<input type="submit" id="timeLocSubBtn" value="Submit">
+		</form>
+	</div>
+	<div id="map" class="center-block"></div>
+  </div>
 
-<div class="description">
-	<h2 class="parkName"></h2>
-	<p class="parkRating"></p>
-	<p class="parkPhone"></p>
-	<p class="parkLocation"></p>
-	<p class="parkHours"></p>
-	<p class="parkWebsite"></p>
+  <div class="col-xs-12 col-md-6">
+		<div class="description center-block">
+			<h2 class="parkName"></h2>
+			<p class="parkRating"></p>
+			<p class="parkPhone"></p>
+			<p class="parkLocation"></p>
+			<p class="parkHours"></p>
+			<p class="parkWebsite"></p>
+		</div>
+  </div>
 </div>
+
 <script type="text/javascript">
     $(document).ready(function() {
 		initMap();
 	});	
 </script>
+

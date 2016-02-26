@@ -30,9 +30,9 @@ function setLocation(position) {
 		lat: position.coords.latitude,
 		lng: position.coords.longitude
 	};
-	infoWindow = new google.maps.InfoWindow({map: map});
-	infoWindow.setPosition(pos);
-	infoWindow.setContent("Location spotted.");
+	// infoWindow = new google.maps.InfoWindow({map: map});
+	// infoWindow.setPosition(pos);
+	// infoWindow.setContent("Location spotted.");
 	map.setCenter(pos);
 }
 
@@ -80,7 +80,7 @@ function addMarker(place) {
 			$(".parkName").html(placeData.name);
 			$(".parkLocation").html("Address: " + placeData.formatted_address);
 			$(".parkPhone").html("Phone: " + placeData.formatted_phone_number);
-			$(".parkWebsite").html("Website: " + placeData.website);
+			$(".parkWebsite").html("Website:<a href='" + placeData.website + "'> " + placeData.website);
 
 			if (placeData.rating) {
 				$(".parkRating").html("Rating: ")

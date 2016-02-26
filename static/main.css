@@ -1,6 +1,47 @@
-/**********
+/******************************
+Basic styling
+*******************************/
+
+body {
+    background-image: url(./images/paw-print-220231_640.jpg);
+}
+
+.navbar {
+    background-color: rgba(35, 23, 1, 0.7);
+}
+
+.navbar-header .navbar-brand, ul.navbar-nav.navbar-right li a {
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px #000;
+}
+
+#submitTimeLocation {
+    display: -webkit-box;
+    max-width: 500px;
+}
+
+#timeLocSubBtn {
+    margin: 30px 0 30px 10px;
+}
+
+.description, .description a {
+    background-color: rgba(255, 122, 0, 0.6);
+    color: white;
+    width: 500px;
+    margin: 12% 0;
+    text-shadow: 1px 1px 1px #000;
+}
+
+
+
+/******************************
 Map styling
-***********/
+******************************/
 #map {
 	width: 500px;
 	height:400px;
@@ -19,6 +60,9 @@ select {
 	width: 200px;
 }
 
+/****************************
+Rating star styling
+*****************************/
 .overflow {
 	height: 200px;
 }
