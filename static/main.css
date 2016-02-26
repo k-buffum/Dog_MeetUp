@@ -14,11 +14,16 @@ body {
     color: white;
 }
 
-h1 {
+#mainPageH1 {
     text-align: center;
     color: white;
     text-shadow: 1px 1px 1px #000;
 }
+
+
+/******************************
+Main page
+*******************************/
 
 #submitTimeLocation {
     display: -webkit-box;
@@ -37,6 +42,42 @@ h1 {
     text-shadow: 1px 1px 1px #000;
 }
 
+/******************************
+Register page
+*******************************/
+
+#registerText, #registerHeader, #registerSubmit {
+    color: #0F81B2;
+    text-align: center;
+    font-weight: bold;
+}
+
+#registerHeader {
+    text-shadow: 1px 1px black;
+}
+
+#registerContainer, #registerPage {
+    text-align: center;
+}
+
+#registerContainer {
+    background-color: rgba(226, 171, 72, 0.8);
+    width: 300px;
+    margin: 0 auto;
+    padding: 10px 0 10px 0;
+}
+
+#usernameLabel {
+    margin: 0;
+}
+
+input {
+    background-color: #0F81B2;
+}
+ #registerSubmit {
+    background-color: #48C8FF;
+    color: #000;
+ }
 
 
 /******************************
