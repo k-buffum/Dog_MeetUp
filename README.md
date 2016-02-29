@@ -32,4 +32,3 @@ This project required a lot of planning and preperation to include the different
 * Graph does not display number of small, medium, and large dogs
 * Map search does not include most dog parks
 * Database does not clear data from previous day, resulting in skewed data on the graph
-* If a user selects the number of dogs on the Settings page before they select a location the page hangs
