@@ -48,11 +48,14 @@ app.get("/", function(req, res) {
 
 // Posts location and time to schedule table
 app.post("/schedule", function(req, res) {
+	var userId = res.locals.currentUser.id;
+	// Checks if user is logged in
 	if (res.locals.currentUser) {
+		// If user logged in checks if park selected
 		if (req.body.parkName) {
 			db.Schedule.findOrCreate({ 
 				where: {
-					userId: res.locals.currentUser.id
+					userId: userId
 				},
 				defaults: {
 					placeId: req.body.parkId,
@@ -60,8 +63,6 @@ app.post("/schedule", function(req, res) {
 					time: req.body.time
 				}
 			}).spread(function(schedule, created) {
-				var userId = res.locals.currentUser.id;
-
 				if (created) {
 					req.currentUser.scheduleId = schedule.id;
 					req.currentUser.save().then(function() {
@@ -77,6 +78,21 @@ app.post("/schedule", function(req, res) {
 					});
 				}
 			});
+
+			// Stores time & placeId in User table
+			db.User.find({
+				where: {
+					id: userId		
+				}
+			}).then(function(user) {
+				// console.log(user);
+				user.updateAttributes({
+					placeId: req.body.parkId,
+					time: req.body.time
+				});
+			});
+
+
 		} else {
 			req.flash("danger", "You must select a location to continue.");
 			res.redirect("/");
@@ -111,12 +127,12 @@ app.get("/schedule", function(req, res) {
 					// Adds google places details under graph
 					request('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + schedule.placeId + '&key=' + process.env.GOOGLE_KEY, function (error, response, body) {
 			  			if (!error && response.statusCode == 200) {
-			  				// console.log(JSON.parse(body).result);
-							res.render("schedule.ejs", {
-								data: JSON.parse(body).result,
-								reviews: reviews,
-								alerts: req.flash()
-							});
+				  			// console.log(JSON.parse(body).result);
+								res.render("schedule.ejs", {
+									data: JSON.parse(body).result,
+									reviews: reviews,
+									alerts: req.flash()
+								});
 			  			}
 					});
 				});
@@ -131,16 +147,13 @@ app.get("/api/schedule", function(req, res) {
 		// Finds user by userID in
 		db.User.findById(res.locals.currentUser.id)
 		.then(function(user) {
-			db.Schedule.findById(user.scheduleId)
-			.then(function(schedule) {
-				db.Schedule.findAll({
-					where: {
-						placeId: schedule.placeId
-					}
-				}).then(function(schedules) {
-					// console.log(schedules);
-					res.send(schedules);
-				});			
+			// Finds all user with the same placeId
+			db.User.findAll({
+				where: {
+					placeId: user.placeId
+				}
+			}).then(function(users) {
+				res.send(users)
 			});
 		});
 	}
@@ -161,11 +174,10 @@ app.post("/settings", function(req, res) {
 	var smallDogs = req.body.smallDogs;
 	var mediumDogs = req.body.mediumDogs;
 	var largeDogs = req.body.largeDogs;
-	var userId = res.locals.currentUser.id;
 	// Updates # of user dogs on Schedule table
-	db.Schedule.find({
+	db.User.find({
 		where: {
-			userId: userId
+			id: res.locals.currentUser.id
 		}
 	}).then(function(schedule){
 		// console.log(schedule);
